@@ -15,12 +15,17 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path,include
-from api_rest.views import CultivoAppView
+from api_rest.views import CultivoAppView,UsersAppView
 
 cultivo_app_view = CultivoAppView()
+user_view = UsersAppView()
 urlpatterns = [
-    path('admin/', admin.site.urls),
     path('api/',include('api_rest.urls')),
-    path('', cultivo_app_view.index, name ='index'),
-    path('index.htm',cultivo_app_view.index, name = 'index')
+    # path('', cultivo_app_view.index, name ='index'),
+    # path('index.htm',cultivo_app_view.index, name = 'index')
+    path('', user_view.welcome),
+    path('register', user_view.register),
+    path('login', user_view.login),
+    path('logout', user_view.logout),
+    path('admin/', admin.site.urls),
 ]
